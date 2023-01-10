@@ -19,18 +19,19 @@ def create_connection():
 
 
 conn = create_connection()
+cursor = create_connection.cursor()
 
 if conn:
     print("Connection established successfully!")
 else:
     print("Error establishing connection.")
 
-cursor = conn.cursor()
+conn = create_connection()
+cursor = create_connection.cursor()
 
 
 def run_query():
     try:
-
         query = "SELECT * FROM report_table limit 100;"
         cursor.execute(query)
         cursor.close()
