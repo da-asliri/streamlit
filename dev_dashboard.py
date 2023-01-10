@@ -26,17 +26,20 @@ else:
     print("Error establishing connection.")
 
 
-# # Execute a SQL query
-# query = "SELECT * FROM report_table limit 100;"
-# cursor = conn.cursor()
-# cursor.execute(query)
-
-# # Fetch the results
-# results = cursor.fetchall()
-
-# # Close the cursor and connection
-# cursor.close()
-# conn.close()
+def run_query():
+    try:
+        cursor = conn.cursor()
+        query = "SELECT * FROM report_table limit 100;"
+        run_query(query)
+        cursor.execute(query)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        print("Query executed successfully.")
+    except Exception as e:
+        print("Error running query:", e)
+        results = cursor.fetchall()
+        return results
 
 # # Display the results in a Streamlit table
 # st.table(results)
