@@ -30,16 +30,16 @@ def run_query():
     try:
         cursor = conn.cursor()
         query = "SELECT * FROM report_table limit 100;"
-        run_query(query)
         cursor.execute(query)
-        conn.commit()
         cursor.close()
         conn.close()
         print("Query executed successfully.")
     except Exception as e:
         print("Error running query:", e)
-        results = cursor.fetchall()
-        return results
+
+
+run_query()
+results = cursor.fetchall()
 
 # # Display the results in a Streamlit table
-# st.table(results)
+st.table(results)
