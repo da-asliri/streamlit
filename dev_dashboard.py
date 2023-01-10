@@ -19,6 +19,7 @@ def create_connection():
 
 
 conn = create_connection()
+cursor = conn.cursor()
 
 if conn:
     print("Connection established successfully!")
@@ -28,7 +29,6 @@ else:
 
 def run_query():
     try:
-        cursor = conn.cursor()
         query = "SELECT * FROM report_table limit 100;"
         cursor.execute(query)
         cursor.close()
