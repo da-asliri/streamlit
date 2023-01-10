@@ -2,22 +2,41 @@ import streamlit as st
 import psycopg2
 
 # Initialize connection.
-# Uses st.experimental_singleton to only run once.
 
 
-@st.experimental_singleton
-def init_connection():
-    return psycopg2.connect(**st.secrets["postgres"])
+def create_connection():
+    try:
+        connection = psycopg2.connect(
+            host="172.17.84.48",
+            user="asliri",
+            password="pentaho2022.",
+            database="log_db"
+        )
+        return connection
+    except Exception as e:
+        print("Error creating connection:", e)
+        return None
 
 
-conn = init_connection()
+conn = create_connection()
+
+if conn:
+    print("Connection established successfully!")
+else:
+    print("Error establishing connection.")
 
 
-@st.experimental_memo(ttl=600)
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+# # Execute a SQL query
+# query = "SELECT * FROM report_table limit 100;"
+# cursor = conn.cursor()
+# cursor.execute(query)
 
+# # Fetch the results
+# results = cursor.fetchall()
 
-rows = run_query("SELECT * from report_table limit 100;")
+# # Close the cursor and connection
+# cursor.close()
+# conn.close()
+
+# # Display the results in a Streamlit table
+# st.table(results)
