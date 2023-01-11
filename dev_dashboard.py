@@ -1,5 +1,6 @@
 import streamlit as st
 import psycopg2
+from psycopg2 import cursor
 
 # Initialize connection.
 
@@ -19,29 +20,27 @@ def create_connection():
 
 
 conn = create_connection()
-cursor = create_connection.cursor()
 
 if conn:
     print("Connection established successfully!")
 else:
     print("Error establishing connection.")
 
-conn = create_connection()
-cursor = create_connection.cursor()
+curr = conn.cursor()
 
 
 def run_query():
     try:
         query = "SELECT * FROM report_table limit 100;"
-        cursor.execute(query)
-        cursor.close()
+        curr.execute(query)
+        curr.close()
         print("Query executed successfully.")
     except Exception as e:
         print("Error running query:", e)
 
 
 run_query()
-results = cursor.fetchall()
+results = curr.fetchall()
 
 # # Display the results in a Streamlit table
 st.table(results)
