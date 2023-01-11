@@ -1,6 +1,5 @@
 import streamlit as st
 import psycopg2
-from psycopg2 import cursor
 
 # Initialize connection.
 
@@ -32,7 +31,6 @@ def run_query():
     try:
         query = "SELECT * FROM report_table limit 100;"
         curr.execute(query)
-        curr.close()
         print("Query executed successfully.")
     except Exception as e:
         print("Error running query:", e)
@@ -40,6 +38,7 @@ def run_query():
 
 run_query()
 results = curr.fetchall()
+curr.close()
 
 # # Display the results in a Streamlit table
 st.table(results)
