@@ -23,10 +23,9 @@ conn = create_connection()
 
 if conn:
     print("Connection established successfully!")
+    curr = conn.cursor()
 else:
     print("Error establishing connection.")
-
-curr = conn.cursor()
 
 
 def run_query():
