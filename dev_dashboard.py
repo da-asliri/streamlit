@@ -32,13 +32,12 @@ def run_query():
         query = "SELECT * FROM report_table limit 100;"
         curr.execute(query)
         print("Query executed successfully.")
-        curr.fetchall()
+        results = curr.fetchall()
         curr.close()
+        return results
     except Exception as e:
         print("Error running query:", e)
 
 
 results = run_query()
-
-# # Display the results in a Streamlit table
 st.table(results)
